@@ -8,8 +8,8 @@ export default {
     extend: {
       backgroundImage: {
         "image" : "url('/src/media/MicrosoftTeams-image-2.png')",
-        "left" : "url('/src/media/MicrosoftTeams-image.png')"
-
+        "left" : "url('/src/media/MicrosoftTeams-image.png')",
+        "mobile" : "URL('/src/media/HD-wallpaper-partly-cloudy-clouds-nature-sky-weather.jpg')"
       }
     },
   },

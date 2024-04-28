@@ -1,63 +1,99 @@
 export default function Weather() {
   return (
     <>
-      <div className="bg-left bg-cover bg-no-repeat h-screen">
-        <div className="container flex justify-center items-center h-full w-full">
-          <div className="bg-image bg-cover bg-no-repeat bg-center w-1/2 h-3/4 flex justify-end">
-            <div className="form w-1/2 flex justify-center items-center ">
-              <form className="max-w-sm mx-auto">
-                <div className="mb-5">
-                  <label                   
-                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                  >
-                    Your email
-                  </label>
-                  <input
-                    
-                    id="email"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder=""
-                    required
-                  />
-                </div>
-                <div className="mb-5">
-                  <label
-                    
-                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                  >
-                    Your password
-                  </label>
-                  <input
-                    
-                    id="password"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    required
-                  />
-                </div>
-                <div className="flex items-start mb-5">
-                  <div className="flex items-center h-5">
+      <div className="container lg:hidden">
+        <div className="bg-mobile bg-cover bg-no-repeat bg-center w-screen h-screen flex ">
+          <div className="first w-full h-full ">
+            <span className="m-4 font-bold flex justify-center text-2xl">Jaipur, In</span>
+            <div className="search flex justify-center">
                     <input
-                      id="remember"
-                      type="checkbox"
-                      value=""
-                      className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800"
-                      required
+                      className=" w-1/2 font-bold text-black bg-transparent backdrop-blur-md border-black rounded-md  m-2 p-1"
+                      type="text"
+                      placeholder="Enter City"
                     />
+                    <button
+                      type="search"
+                      className="font-bold border-black rounded-md m-2 p-1"
+                    >
+                      Search
+                    </button>
                   </div>
-                  <label
-                    
-                    className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                  >
-                    Remember me
-                  </label>
+            <span className="m-4 text-lg text-black font-bold">
+              38.7
+            </span>
+            <div className="temp flex justify-between">
+              <span className="m-4 text-lg  text-black font-bold">38.7</span>
+              <span className="m-4 text-lg  text-black font-bold">38.7&#8451;</span>
+            </div>
+            <div className="flex items-center text-lg justify-evenly w-screen h-1/2  ">
+                  <div className="info font-bold ">
+                    <div className="m-2">Visibility</div>
+                    <div className="m-2">Wind Speed</div>
+                    <div className="m-2">Temperature</div>
+                  </div>
+                  <div className="values font-bold ">
+                    <p className="m-2">5 Km</p>
+                    <p className="m-2">10 Km</p>
+                    <p className="m-2">30&#8451;</p>
+                  </div>
                 </div>
-                <button
-                  type="submit"
-                  className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                >
-                  Submit
-                </button>
-              </form>
+            
+          </div>
+        </div>
+      </div>
+
+
+      <div className="big container">
+        <div className="bg-left bg-cover bg-no-repeat h-screen w-screen">
+          <div className="flex justify-center items-center h-full w-full">
+            <div className="bg-image bg-cover bg-no-repeat bg-center w-1/2 h-3/4 flex ">
+              <div className="first w-1/2 h-full">
+                <div className="flex me-1 justify-end font-bold">
+                <span>Jaipur, In</span>                
+                </div>
+                <div className="ms-1 relative top-[75%]  text-white font-bold">
+                <span >38.7</span>
+                </div>
+                <div className="temp relative top-[78%] flex justify-between">
+                  <span className="ms-1  text-white font-bold">38.7</span>
+                  <span className="me-1  text-white font-bold">38.7&#8451;</span>
+                </div>
+              </div>
+              <div className="second w-1/2 h-full flex-col justify-center items-center  ">
+                <div className="half w-full h-1/3 overflow-hidden">
+                  <div className="search flex justify-center">
+                    <input
+                      type="text"
+                      placeholder="Enter City"
+                      className=" w-1/2 border-black rounded-md bg-transparent m-2 p-1"
+                    />
+                    <button
+                      type="search"
+                      className="font-thin border-black rounded-md m-2 p-1 hover:bg-blue-50"
+                    >
+                      Search
+                    </button>
+                  </div>
+                  <div className="city flex h-10  justify-center items-center">
+                    <div className="mt-10 text-xl font-bold">
+                      <p className="">Jaipur,IN</p>
+                      <p className="">Haze</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="flex items-center text-lg justify-evenly w-full h-1/2  ">
+                  <div className="info font-bold text-white">
+                    <div className="m-2">Visibility</div>
+                    <div className="m-2">Wind Speed</div>
+                    <div className="m-2">Temperature</div>
+                  </div>
+                  <div className="values font-bold text-white">
+                    <p className="m-2">5 Km</p>
+                    <p className="m-2">10 Km</p>
+                    <p className="m-2">30&#8451;</p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
