@@ -74,7 +74,7 @@ export default function Weather() {
                       placeholder="Enter City"
                       className="w-full border border-black rounded-md bg-transparent m-2 p-1"
                     />
-                    <div className="btn p-3 flex items-center">
+                    <div className="btn2 p-3 flex items-center">
                     <button
                       type="search"
                       // className="font-bold border-2 border-black rounded-md m-2 p-1"

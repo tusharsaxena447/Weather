@@ -18,11 +18,16 @@
   } */
 
   .btn:active{
-    background-color: cyan;
-    border-radius: 50%;
-    transform: scale(1.1);
-  }
-  .btn:hover{
     background-color: gray;
     border-radius: 50%;
+    transform: scale(1.2);
+  }
+  .btn2:hover{
+    background-color: lightgray;
+    border-radius: 50%;
+  }
+  .btn2:active{
+    background-color: gray;
+    border-radius: 50%;
+    transform: scale(1.2);
   }
