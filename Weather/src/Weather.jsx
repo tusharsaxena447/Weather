@@ -1,4 +1,23 @@
+import { useState } from "react";
+
 export default function Weather() {
+  const [cityName, setCityName] = useState("Jaipur")
+  const [weather,setWeather] = useState({})
+  function handleChange(e){
+    setCityName(e.target.value)
+  }
+
+  const handleSearch = ()=>{
+    const apikey = "717fd57028e3bdb8a205a67f7daf3d74"
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apikey}&units=metric`
+    fetch(url)
+    .then(res => res.json())
+    .then(data => {
+      setWeather(data)
+      console.log(weather)
+    })
+    
+  }
   return (
     <>
       <div className="container  lg:hidden">
@@ -7,8 +26,9 @@ export default function Weather() {
           <div className="search flex justify-between sm:justify-center">
                     <input
                       className="w-full font-bold sm:w-1/3 text-black bg-transparent backdrop-blur-md border border-black rounded-md  m-2 p-1"
-                      type="text"
+                      type="text" 
                       placeholder="Enter City"
+                      value={cityName}
                     />
                     <button
                       type="submit"
@@ -55,15 +75,15 @@ export default function Weather() {
             <div className="bg-image bg-cover bg-no-repeat bg-center w-1/2 h-3/4 flex ">
               <div className="first w-1/2 h-full">
               <div className="city flex justify-between">
-            <span className="m-4 font-bold  text-lg">Jaipur</span>
-            <span className="m-4 font-bold  text-lg">Rajasthan, IN</span>
+            <span className="m-4 font-bold  text-lg">{weather.name && weather.name}</span>
+            <span className="m-4 font-bold  text-lg">{weather.sys && weather.sys.country}</span>
             </div>
                 <div className="ms-4 relative top-[75%]  text-white font-bold">
                 <span >38.7</span>
                 </div>
                 <div className="temp relative top-[75%] flex justify-between">
                   <span className="ms-4  text-white font-bold">38.7</span>
-                  <span className="me-1 text-5xl text-white font-bold">38.7&#8451;</span>
+                  <span className="me-1 text-5xl text-white font-bold">{weather.main && Number(weather.main.temp).toFixed(2)}&#8451;</span>
                 </div>
               </div>
               <div className="second w-1/2 h-full flex-col justify-center items-center  ">
@@ -72,6 +92,8 @@ export default function Weather() {
                     <input
                       type="text"
                       placeholder="Enter City"
+                      value={cityName} 
+                      onChange={handleChange}
                       className="w-full border border-black rounded-md bg-transparent m-2 p-1"
                     />
                     <div className="btn2 p-3 flex items-center">
@@ -79,6 +101,7 @@ export default function Weather() {
                       type="search"
                       // className="font-bold border-2 border-black rounded-md m-2 p-1"
                       className=" bg-search w-5  h-5  bg-cover bg-no-repeat bg-center "
+                      onClick={handleSearch}
                     >
                     </button>
                     </div>
@@ -86,7 +109,7 @@ export default function Weather() {
                   <div className="city flex h-10  justify-center items-center">
                     <div className="mt-10 text-xl  font-bold">
                       <p className="flex justify-center items-center">Jaipur,IN</p>
-                      <p className="flex justify-center items-center">Haze</p>
+                      <p className="flex justify-center items-center">{weather.weather && weather.weather[0].main}</p>
                     </div>
                   </div>
                 </div>
@@ -97,9 +120,9 @@ export default function Weather() {
                     <div className="m-2">Temperature</div>
                   </div>
                   <div className="values font-bold text-white">
-                    <p className="m-2">5 Km</p>
-                    <p className="m-2">10 Km</p>
-                    <p className="m-2">30&#8451;</p>
+                    <p className="m-2">{weather && (weather.visibility/1000)}KM</p>
+                    <p className="m-2">{weather.wind && weather.wind.speed}Km</p>
+                    <p className="m-2">{weather.main && Number(weather.main.temp).toFixed(2)}&#8451;</p>
                   </div>
                 </div>
               </div>
