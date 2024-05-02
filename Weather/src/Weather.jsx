@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import country_data from './assets/country_data.json'
 
 export default function Weather() {
   let default_city = "Jaipur";
@@ -10,6 +11,7 @@ export default function Weather() {
   const [sunrise, setSunrise] = useState({});
   const [sunset, setSunset] = useState({}); 
   const [hidden, setHidden] = useState('invisible')
+  const [country, setCountry] = useState()
   function handleChange(e) {
     setCityName(e.target.value);
   }
@@ -17,15 +19,23 @@ export default function Weather() {
     handleSearch();
     setCityName("")
   }, []);
-
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      handleSearch()
+    }
+  }
   function handleSearch() {
     const apikey = "caf7408bbf0702fb845bebbc421ce6e9";
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apikey}&units=metric`;
     fetch(url)
       .then((res) => res.json())
       .then((data) => {
-        if (data.cod === "404") {
+        if (data.cod === "404" || cityName === "") {
           setHidden()
+          setTimeout(() => {
+            setHidden("invisible")
+            
+          },2000);
         } else {
           setHidden("invisible")
           setWeather(data);
@@ -44,7 +54,13 @@ export default function Weather() {
             minutes: realTimE.getMinutes(),
           });
         }
+        country_data.forEach((e)=>{
+          if (e.code == data.sys.country){
+            setCountry(e.name)
+          }
+        })
         setCityName("")
+        // console.log(country)
       });
   }
 
@@ -73,25 +89,38 @@ export default function Weather() {
                 {weather.name && weather.name}
               </span>
               <span className="m-4 font-bold  text-xl">
-                {weather.sys && weather.sys.country}
+                {country}
               </span>
             </div>
             {/* <span className="m-4 text-lg flex sm:w-1/4 sm:m-0 sm:justify-end  text-black font-bold">38.7</span>            */}
-            <div className="temp flex justify-between sm:justify-around">
-              <span className="m-4 text-lg  text-black font-bold">
-                Feels Like
-              </span>
-              <span className="m-4 text-small  text-black font-bold">
-                {weather.main && weather.main.feels_like}
-              </span>
-            </div>
+            
+            
             <div className="temp flex justify-end sm:justify-center">
               {/* <span className="m-4 text-lg  text-black font-bold">38.7</span> */}
               <span className="m-4 text-5xl  text-black font-bold">
                 {weather.main && Number(weather.main.temp).toFixed(2)}&#8451;
               </span>
             </div>
-
+            <div className="temp flex justify-between sm:justify-around">
+              <span className="ms-4 text-lg  text-black font-bold">
+                Feels Like
+              </span>
+              <span className="me-1 text-small  text-black font-bold">
+                {weather.main && weather.main.feels_like}
+              </span>
+            </div>
+            <div className="temp  flex justify-between sm:justify-around">
+                  <span className="ms-4  font-bold">Sunrise</span>
+                  <span className="me-1 font-bold">
+                    {`${sunrise.hour}: ${sunrise.minutes}`}
+                  </span>
+                </div>
+                <div className="temp  flex justify-between sm:justify-around">
+                  <span className="ms-4  font-bold">Sunset</span>
+                  <span className="me-1 font-bold">
+                    {`${sunset.hour}: ${sunset.minutes}`}
+                  </span>
+                </div>
             <div className="flex items-center text-white text-lg justify-evenly w-screen h-1/2  ">
               <div className="info font-bold ">
                 <div className="m-2">Visibility</div>
@@ -138,7 +167,7 @@ export default function Weather() {
                     {weather.name && weather.name}
                   </span>
                   <span className="m-4 font-bold  text-lg">
-                    {weather.sys && weather.sys.country}
+                    {country}
                   </span>
                 </div>
                 <div className="ms-4 flex justify-between font-bold">
@@ -160,7 +189,9 @@ export default function Weather() {
                   </span>
                 </div>
                 <div className="temp  flex justify-end">
+                
                   <span className="me-1 text-5xl font-bold">
+                  
                     {weather.main && Number(weather.main.temp).toFixed(2)}
                     &#8451;
                   </span>
@@ -174,6 +205,7 @@ export default function Weather() {
                       placeholder="Enter City"
                       value={cityName}
                       onChange={handleChange}
+                      onKeyDown={handleKeyDown}
                       className="w-full border border-black rounded-md bg-transparent m-2 p-1"
                     />
                     <div className="btn2 p-3 flex items-center">
@@ -185,12 +217,13 @@ export default function Weather() {
                       ></button>
                     </div>
                   </div>
-                  <div className="city flex h-10  justify-center items-center">
-                    <div className="mt-10 text-xl  font-bold">
+                  <div className="city flex mt-10 h-10 justify-evenly items-center">
+                  <img src={`https://openweathermap.org/img/wn/${weather.weather && weather.weather[0].icon}@2x.png`}/>
+                    <div className=" text-xl  font-bold">
                       <p className="flex justify-center items-center">
-                        {weather.name && weather.name},
-                        {weather.sys && weather.sys.country}
+                        <p>{weather.name && weather.name},</p>
                       </p>
+                        <p className="flex justify-center items-center">{country}</p>
                       <p className="flex justify-center items-center">
                         {weather.weather && weather.weather[0].main}
                       </p>
