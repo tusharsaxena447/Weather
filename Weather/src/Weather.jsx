@@ -34,7 +34,6 @@ export default function Weather() {
           setHidden()
           setTimeout(() => {
             setHidden("invisible")
-            
           },2000);
         } else {
           setHidden("invisible")
